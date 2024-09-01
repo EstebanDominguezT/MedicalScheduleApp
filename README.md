@@ -53,9 +53,34 @@ npm install
 ### 8. Compilar los assets
 Ejecuta el siguiente comando para compilar los assets
 ```bash
-npm run dev
+npm run build
 ```
-### 9. Iniciar el servidor
+### 9. Genera las carpetas necesarias para las sessiones 
+Ejecuta el siguiente comando para generar las carpetas necesarias para las sessiones
+```bash
+mkdir -p storage/framework/sessions
+mkdir -p storage/framework/views
+mkdir -p storage/framework/cache
+```
+### 10. Asignar permisos a las carpetas de storage
+Ejecuta el siguiente comando para asignar permisos a las carpetas de storage
+```bash
+chmod -R 775 storage
+chmod -R 775 bootstrap/cache
+```
+También, asegúrate de que el propietario del directorio sea el usuario correcto, que a menudo es el usuario bajo el que se ejecuta el servidor web (por ejemplo, www-data en Ubuntu con Nginx o Apache):
+```bash
+chown -R www-data:www-data storage
+chown -R www-data:www-data bootstrap/cache
+```
+### 11. Limpia cache y demas archivos temporales
+Ejecuta el siguiente comando para limpiar cache y demas archivos temporales
+```bash
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+### 12. Iniciar el servidor
 Ejecuta el siguiente comando para iniciar el servidor
 ```bash
 php artisan serve
@@ -65,7 +90,7 @@ Accede a la aplicacion en tu navegador con la siguiente url
 ```bash
 http://127.0.0.1:8000
 ```
-### 11. Acceso como administrador
+### 13. Acceso como administrador
 Para acceder como administrador puedes utilizar las siguientes credenciales
 ```bash
 email: estebantalavera17@gmail.com
@@ -81,6 +106,6 @@ Para acceder como paciente puedes utilizar las siguientes credenciales
 email: javierantonio.perez@example.com
 password: 123456!
 ```
-### 12. La coleccion postman se encuentra en la raiz del proyecto con el nombre `MedicalScheduler.postman_collection.json`
+### 14. La coleccion postman se encuentra en la raiz del proyecto con el nombre `MedicalScheduler.postman_collection.json`
 
 ## Gracias por la oportunidad de poder demostrar un poco de mis conocimientos!!
