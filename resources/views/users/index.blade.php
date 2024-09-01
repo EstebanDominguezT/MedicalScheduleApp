@@ -28,11 +28,11 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->role->name }}</td>
                                         <td>
-                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                                             <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline-block;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
                                             </form>
                                         </td>
                                     </tr>

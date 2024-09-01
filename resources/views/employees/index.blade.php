@@ -9,7 +9,6 @@
 
                     <div class="card-body">
 
-                        <a href="{{ route('employees.create') }}" class="btn btn-primary mb-3">{{ __('Create Employee') }}</a>
                         <table class="table">
                             <thead>
                                 <tr>

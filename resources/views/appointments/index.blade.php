@@ -3,12 +3,14 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">{{ __('Appointments') }}</div>
 
                     <div class="card-body">
-                        <a href="{{ route('appointments.create') }}" class="btn btn-primary">Create Appointment</a>
+                        @can('can-create-appointment')
+                            <a href="{{ route('appointments.create') }}" class="btn btn-primary">Create Appointment</a>
+                        @endcan
                     </div>
 
                     <div class="card-body">
@@ -31,13 +33,17 @@
                                         <td>{{ $appointment->doctor->user->person->full_name() }}</td>
                                         <td>{{ $appointment->start_datetime }}</td>
                                         <td>{{ $appointment->end_datetime }}</td>
-                                        <td>
-                                            <a href="{{ route('appointments.edit', $appointment->id) }}" class="btn btn-primary">Edit</a>
-                                            <form action="{{ route('appointments.destroy', $appointment->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
+                                        <td style="width: 100px">
+                                            @can('can-update-appointment')
+                                                <a href="{{ route('appointments.edit', $appointment->id) }}" class="btn btn-primary mb-2"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            @endcan
+                                            @can('can-delete-appointment')
+                                                <form action="{{ route('appointments.destroy', $appointment->id) }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger mb-2"><i class="fa-solid fa-trash-can"></i></button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

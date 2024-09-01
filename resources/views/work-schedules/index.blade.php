@@ -3,12 +3,14 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">{{ __('Work Schedules') }}</div>
 
                     <div class="card-body">
-                        <a href="{{ route('work_schedule.create') }}" class="btn btn-primary">{{ __('Create') }}</a>
+                        @can('can-create-work-schedule')
+                            <a href="{{ route('work_schedule.create') }}" class="btn btn-primary">{{ __('Create') }}</a>
+                        @endcan
                     </div>
 
                     <div class="card-body">
@@ -31,13 +33,17 @@
                                         <td>{{ $workSchedule->end_time }}</td>
                                         <td>{{ $workSchedule->lunch_start_time }}</td>
                                         <td>{{ $workSchedule->lunch_end_time }}</td>
-                                        <td>
-                                            <a href="{{ route('work_schedule.edit', $workSchedule) }}" class="btn btn-primary">{{ __('Edit') }}</a>
-                                            <form action="{{ route('work_schedule.destroy', $workSchedule) }}" method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
-                                            </form>
+                                        <td style="width: 100px">
+                                            @can('can-update-work-schedule')
+                                                <a href="{{ route('work_schedule.edit', $workSchedule) }}" class="btn btn-primary mb-2"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            @endcan
+                                            @can('can-delete-work-schedule')
+                                                <form action="{{ route('work_schedule.destroy', $workSchedule) }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger mb-2"><i class="fa-solid fa-trash-can"></i></button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

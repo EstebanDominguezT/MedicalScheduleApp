@@ -8,7 +8,9 @@
                     <div class="card-header">{{ __('employees Types') }}</div>
 
                     <div class="card-body">
-                        <a href="{{ route('employee.types.create') }}" class="btn btn-primary mb-3">{{ __('Create employees Type') }}</a>
+                        @can('can-create-employee-type')
+                            <a href="{{ route('employee.types.create') }}" class="btn btn-primary mb-3">{{ __('Create employees Type') }}</a>
+                        @endcan
 
                         <table class="table">
                             <thead>
@@ -23,13 +25,17 @@
                                     <tr>
                                         <td>{{ $employeeType->id }}</td>
                                         <td>{{ $employeeType->name }}</td>
-                                        <td>
-                                            <a href="{{ route('employee.types.edit', $employeeType->id) }}" class="btn btn-primary">{{ __('Edit') }}</a>
-                                            <form method="POST" action="{{ route('employee.types.destroy', $employeeType->id) }}" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
-                                            </form>
+                                        <td style="width: 100px">
+                                            @can('can-update-employee-type')
+                                                <a href="{{ route('employee.types.edit', $employeeType->id) }}" class="btn btn-primary mb-2"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            @endcan
+                                            @can('can-delete-employee-type')
+                                                <form method="POST" action="{{ route('employee.types.destroy', $employeeType->id) }}" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger mb-2"><i class="fa-solid fa-trash-can"></i></button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
