@@ -27,9 +27,9 @@ class AppointmentController extends Controller
         if (auth()->user()->hasRole('administrator')) {
             $appointments = Appointment::all();
         } elseif (auth()->user()->hasRole('doctor')) {
-            $appointments = Appointment::where('doctor_id', $doctors->id)->get();
+            $appointments = Appointment::where('doctor_id', auth()->user()->id)->get();
         } else {
-            $appointments = Appointment::where('patient_id', $patients->id)->get();
+            $appointments = Appointment::where('patient_id', auth()->user()->id)->get();
         }
 
         return view('appointments.index', compact('doctors', 'patients', 'appointments'));

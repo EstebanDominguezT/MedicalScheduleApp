@@ -46,13 +46,13 @@ class RoleHasPermissionsTableSeeder extends Seeder
                 'can-update-user',
                 'can-delete-user',
             ],
-            'employee' => [
+            'doctor' => [
                 'can-create-appointment',
                 'can-read-appointment',
                 'can-update-appointment',
                 'can-delete-appointment',
             ],
-            'doctor' => [
+            'employee' => [
                 'can-create-appointment',
                 'can-read-appointment',
                 'can-update-appointment',
